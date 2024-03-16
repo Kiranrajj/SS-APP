@@ -1,0 +1,32 @@
+<div class="main">
+  <div class="container">
+    <div>
+      <div class="row">
+        <div class="col-4">
+          <label for="customerName">Customer Name</label>
+          <input type="text" id="customerName">
+        </div>
+        <div class="col-4">
+          <label for="customerNumber">Customer Mobile Number</label>
+          <input type="text" id="customerNumber">
+        </div>
+        <div class="col-4">
+          <label for="vehicles">Vehicles</label>
+          <ng-select
+                    name="vehicles"
+                    class="form-control"
+                    [items]="vehicles"
+                    bindLabel="name"
+                    [(ngModel)]="model.Vehicles"
+                    (ngModelChange)="change()"
+                    required>
+                  </ng-select>
+        </div>
+        <!-- <div class="col-4">
+          <label for="vehicleNumber">Vehicle Number</label>
+          <input type="text" id="vehicleNumber">
+        </div> -->
+      </div>
+    </div>
+  </div>
+</div>
