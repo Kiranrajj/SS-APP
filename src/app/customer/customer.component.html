@@ -3,24 +3,49 @@
     <div>
       <div class="row">
         <div class="col-4">
-          <label for="customerName">Customer Name</label>
-          <input type="text" id="customerName">
+          <label for="name">Customer Name</label>
+          <input
+            [(ngModel)]="model.name"
+            (ngModelChange)="change()"
+            class="form-control"
+            type="text"
+            id="name"
+          />
         </div>
         <div class="col-4">
-          <label for="customerNumber">Customer Mobile Number</label>
-          <input type="text" id="customerNumber">
+          <label for="mobile">Customer Mobile Number</label>
+          <input
+            [(ngModel)]="model.mobile"
+            (ngModelChange)="change()"
+            class="form-control"
+            type="number"
+            id="mobile"
+          />
         </div>
         <div class="col-4">
           <label for="vehicles">Vehicles</label>
           <ng-select
-                    name="vehicles"
-                    class="form-control"
-                    [items]="vehicles"
-                    bindLabel="name"
-                    [(ngModel)]="model.Vehicles"
-                    (ngModelChange)="change()"
-                    required>
-                  </ng-select>
+            name="vehicles"
+            class="form-control"
+            [items]="vehicles"
+            bindLabel="name"
+            [(ngModel)]="model.Vehicles"
+            (ngModelChange)="change()"
+            required
+          >
+          </ng-select>
+        </div>
+        <div class="col-4">
+          <label for="userType">Type</label>
+          <ng-select
+            name="userType"
+            class="form-control"
+            [items]="userTypes"
+            [(ngModel)]="model.userType"
+            (ngModelChange)="change()"
+            required
+          >
+          </ng-select>
         </div>
         <!-- <div class="col-4">
           <label for="vehicleNumber">Vehicle Number</label>

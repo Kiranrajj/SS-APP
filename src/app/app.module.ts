@@ -7,13 +7,15 @@ import { VehiclesComponent } from './vehicles/vehicles.component';
 import { CustomerComponent } from './customer/customer.component';
 import { ServicePageComponent } from './service-page/service-page.component';
 import { FormsModule } from '@angular/forms';
+import { SupplyEntryComponent } from './supply-entry/supply-entry.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     VehiclesComponent,
     CustomerComponent,
-    ServicePageComponent
+    ServicePageComponent,
+    SupplyEntryComponent
   ],
   imports: [
     BrowserModule,
