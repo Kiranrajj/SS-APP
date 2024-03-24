@@ -8,6 +8,19 @@ import { CustomerComponent } from './customer/customer.component';
 import { ServicePageComponent } from './service-page/service-page.component';
 import { FormsModule } from '@angular/forms';
 import { SupplyEntryComponent } from './supply-entry/supply-entry.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatCardModule } from '@angular/material/card';
+import { provideNativeDateAdapter } from '@angular/material/core';
+import {
+  NgxMatDatetimePickerModule,
+  NgxMatTimepickerModule,
+} from '@angular-material-components/datetime-picker';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -15,15 +28,23 @@ import { SupplyEntryComponent } from './supply-entry/supply-entry.component';
     VehiclesComponent,
     CustomerComponent,
     ServicePageComponent,
-    SupplyEntryComponent
+    SupplyEntryComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgSelectModule,
-    FormsModule
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    MatSelectModule,
+    MatCardModule,
+    MatDatepickerModule,
+    NgxMatDatetimePickerModule,
+    HttpClientModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [provideAnimationsAsync(), provideNativeDateAdapter()],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
