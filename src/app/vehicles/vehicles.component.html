@@ -1,58 +1,39 @@
-<div class="main">
-  <div class="container">
-    <div>
-      <form #form="ngForm" (ngSubmit)="submit(form)">
-        <div class="row">
-          <div class="col-4">
-            <label for="vehicleName">Vehicle Name</label>
-            <input
-              name="vehicleName"
-              class="form-control"
-              [(ngModel)]="model.vehicleName"
-              (ngModelChange)="change()"
-              type="text"
-              id="vehicleName"
-            />
-          </div>
-          <div class="col-4">
-            <label for="vehicleNumber">Vehicle Number</label>
-            <input
-              class="form-control"
-              [(ngModel)]="model.vehicleNumber"
-              (ngModelChange)="change()"
-              type="text"
-              name="vehicleNumber"
-              id="vehicleNumber"
-            />
-          </div>
-          <div class="col-4">
-            <label for="vehicleType">Vehicle Type</label>
-            <ng-select
-              name="vehicleType"
-              class="form-control"
-              [items]="vehicleTypes"
-              [(ngModel)]="model.vehicleType"
-              (ngModelChange)="change()"
-              required
-            >
-            </ng-select>
-          </div>
-          <div class="col-4">
-            <label for="amount">Amount</label>
-            <input
-              class="form-control"
-              [(ngModel)]="model.amount"
-              (ngModelChange)="change()"
-              type="number"
-              name="amount"
-              id="amount"
-            />
-          </div>
-          <div>
-            <button type="submit">Save</button>
-          </div>
+<div class="header bg-gradient-primary pb-8 pt-5 pt-md-8"></div>
+<div class="container-fluid mt--7">
+  <!-- Table -->
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header border-0">
+          <h3 class="mb-0">Vehicle List</h3>
         </div>
-      </form>
+        <div>
+          <mat-tab-group
+            mat-align-tabs="center"
+            [selectedIndex]="isDeleted ? 1 : 0"
+            (selectedIndexChange)="selectTab($event)"
+          >
+            <mat-tab *ngFor="let tab of tabs" [label]="tab">
+              <div class="table-responsive">
+                <app-mat-grid
+                  [tableConfig]="tableConfig"
+                  [data]="vehicles"
+                  (rowDoubleClicked)="view($event)"
+                ></app-mat-grid>
+                <!-- <app-pagination
+                  [data]="vehicles"
+                  (getPage)="navigateToPage($event)"
+                ></app-pagination> -->
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+      </div>
     </div>
   </div>
+</div>
+<div class="fab fab-bottom fab-right">
+  <a class="btn btn-primary" [routerLink]="['/vehicles', 'new']">
+    <i class="fa fa-plus" aria-hidden="true"></i>
+  </a>
 </div>

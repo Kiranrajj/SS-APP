@@ -12,4 +12,19 @@ exports.createVehicle = (req, res) => {
   });
 
   vehicle.save();
+  res.send(200);
+};
+
+exports.getAllVehicles = async (req, res) => {
+  let input = req.query;
+  let query = {
+    s: input.isDeleted && input.isDeleted.toString() == "true" ? "D" : "A",
+  };
+
+  Vehicle.paginate(query, {
+    page: input.page,
+    limit: parseInt(input.per_page || 10),
+  }).then((result) => {
+    res.send(200, result);
+  });
 };

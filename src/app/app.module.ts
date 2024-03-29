@@ -21,6 +21,12 @@ import {
   NgxMatTimepickerModule,
 } from '@angular-material-components/datetime-picker';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { VehicleFormComponent } from './vehicles/vehicle-form/vehicle-form.component';
+import { CustomerFormComponent } from './customer/customer-form/customer-form.component';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { MatTableModule } from '@angular/material/table';
+import { MatGridComponent } from './Components/mat-grid/mat-grid.component';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -29,6 +35,9 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     CustomerComponent,
     ServicePageComponent,
     SupplyEntryComponent,
+    VehicleFormComponent,
+    CustomerFormComponent,
+    MatGridComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,6 +52,9 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     MatDatepickerModule,
     NgxMatDatetimePickerModule,
     HttpClientModule,
+    TabsModule.forRoot(),
+    MatTableModule,
+    MatTabsModule,
   ],
   providers: [provideAnimationsAsync(), provideNativeDateAdapter()],
   bootstrap: [AppComponent],

@@ -1,0 +1,75 @@
+<div class="main">
+  <div class="container">
+    <div>
+      <form #form="ngForm" (ngSubmit)="submit(form)">
+        <div class="row">
+          <div class="col-4">
+            <label for="vehicleName">Vehicle Name</label>
+            <input
+              name="vehicleName"
+              class="form-control"
+              [(ngModel)]="model.vehicleName"
+              (ngModelChange)="change()"
+              type="text"
+              id="vehicleName"
+            />
+          </div>
+          <div class="col-4">
+            <label for="vehicleNumber">Vehicle Number</label>
+            <input
+              class="form-control"
+              [(ngModel)]="model.vehicleNumber"
+              (ngModelChange)="change()"
+              type="text"
+              name="vehicleNumber"
+              id="vehicleNumber"
+            />
+          </div>
+          <div class="col-4">
+            <label for="vehicleType">Vehicle Type</label>
+            <ng-select
+              name="vehicleType"
+              class="form-control"
+              [items]="vehicleTypes"
+              [(ngModel)]="model.vehicleType"
+              (ngModelChange)="change()"
+              required
+            >
+            </ng-select>
+          </div>
+          <div class="col-4">
+            <label for="amount">Amount</label>
+            <input
+              class="form-control"
+              [(ngModel)]="model.amount"
+              (ngModelChange)="change()"
+              type="number"
+              name="amount"
+              id="amount"
+            />
+          </div>
+          <div class="col-md-4 text-md-right">
+            <button
+              [routerLink]="['/vehicles']"
+              class="btn btn-light btn-labeled"
+            >
+              <span class="btn-label">
+                <i class="fa fa-ban"></i>
+              </span>
+              <span> Cancel </span>
+            </button>
+            <button type="submit" class="btn btn-success btn-labeled">
+              <span class="btn-label">
+                <i class="fa fa-save"></i>
+              </span>
+              <span> Save </span>
+            </button>
+          </div>
+          <div>
+            <button type="submit">Save</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

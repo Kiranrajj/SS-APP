@@ -3,6 +3,9 @@ var bodyParser = require("body-parser");
 var path = require("path");
 let User = require("./routes/user");
 let Vehicle = require("./routes/vehicle");
+const mongoose = require("mongoose");
+
+mongoose.connect("mongodb://127.0.0.1:27017/SS-APP");
 
 const app = express();
 app.use(express.json());

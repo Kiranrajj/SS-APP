@@ -1,0 +1,56 @@
+<table class="table table-hover">
+  <thead class="text-primary">
+    <th
+      *ngFor="let header of tableConfig"
+      [ngClass]="{ action: header.actions }"
+    >
+      {{ header.column }}
+    </th>
+  </thead>
+  <tbody>
+    <tr class="text-center" *ngIf="data?.docs?.length < 1">
+      <td [attr.colspan]="(tableConfig || []).length + 1">
+        {{ emptyRowMessage || "No rows to display" }}
+      </td>
+    </tr>
+    <tr
+      [ngClass]="{ 'table-active': row._id == row_id }"
+      *ngFor="let row of data.docs"
+      (click)="row_id = row._id; emitClickEvent(row)"
+      (dblclick)="emitDoubleClickEvent(row)"
+    >
+      <td *ngFor="let header of tableConfig" class="cursor-pointer">
+        <div [ngClass]="{ 'd-flex': header.actions }">
+          <span
+            *ngIf="typeof(header.columnVal) == 'function'"
+            [innerHTML]="header.columnVal(row)"
+          ></span>
+          <span
+            class="d-flex"
+            *ngIf="
+              typeof(header.columnVal) != 'function' &&
+              (header.if || (header.if == undefined && header.if == null))
+            "
+            [innerHTML]="
+              header.conversion
+                ? header.conversion(row[header.columnVal])
+                : row[header.columnVal]
+            "
+          ></span>
+          <span *ngFor="let action of header?.actions || []">
+            <button
+              *ngIf="action.if || !present(action, 'if')"
+              class="btn btn-sm btn-link btn-just-icon"
+              [routerLink]="action.routerLink"
+              data-toggle="tooltip"
+              [title]="action.title || ''"
+              (click)="action.handler(row)"
+            >
+              <i [class]="action.icon" aria-hidden="true"></i>
+            </button>
+          </span>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>

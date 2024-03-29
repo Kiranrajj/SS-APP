@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 import { VehicleService } from '../services/vehicle.service';
@@ -9,18 +9,31 @@ import { VehicleService } from '../services/vehicle.service';
   styleUrl: './vehicles.component.scss',
 })
 export class VehiclesComponent {
-  vehicleTypes: any = ['100', '200', '400', '600'];
-  model: any = {};
+  vehicles: any = {
+    docs: [],
+  };
+  tableConfig: any = [];
+  tabs: any = ['Active', 'Deleted'];
+  isDeleted: any = false;
+  filter: any = {
+    isDeleted: false,
+    page: 1,
+  };
 
   constructor(private router: Router, private vehicleService: VehicleService) {}
 
-  change() {
-    console.log(this.model);
+  ngOnInit(): void {
+    this.vehicleService.getAllVehicles(this.filter).subscribe((data) => {
+      this.vehicles = data;
+    });
   }
 
-  submit(form: any) {
-    console.log('yes');
-    console.log(this.model);
-    this.vehicleService.createVehicle(this.model).subscribe((data: any) => {});
+  selectTab(event: any) {}
+
+  navigateToPage(page: any) {}
+  view(category: any) {
+    if (category.s == 'A') {
+      this.router.navigate(['/category/' + category._id + '/view']);
+    }
   }
 }
