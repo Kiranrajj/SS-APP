@@ -17,10 +17,10 @@ export class VehicleService {
   }
 
   getAllVehicles(input: any): Observable<any> {
-    let url = `http://localhost:8080/category/`;
+    let url = `http://localhost:8080/vehicle/`;
     return this.http.get<any>(url, { params: input }).pipe(
       map((data) => {
-        return data.data;
+        return data;
       }),
       catchError(() => throwError('Unable to Authorized'))
     );

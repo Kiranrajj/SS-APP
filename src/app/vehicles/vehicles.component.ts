@@ -24,8 +24,36 @@ export class VehiclesComponent {
 
   ngOnInit(): void {
     this.vehicleService.getAllVehicles(this.filter).subscribe((data) => {
-      this.vehicles = data;
+      this.vehicles.docs = data;
+      console.log(this.vehicles);
     });
+    this.tableConfig = [
+      { column: 'Vehicle Name', columnVal: 'vehicleName' },
+      { column: 'Vehicle Number', columnVal: 'vehicleNumber' },
+      { column: 'Type', columnVal: 'type' },
+      { column: 'Amount', columnVal: 'amount' },
+      {
+        column: 'Action',
+        actions: [
+          {
+            if: true, // condition wether it would be visible or not
+            title: 'Edit',
+            icon: 'fa fa-edit text-success', // `fa fa-trash` will change like <i class="fa fa-trash"></i>
+            handler: (row: any) => {
+              this.router.navigate([`/vehicles/${row._id}`]);
+            },
+          },
+          {
+            if: true, // condition wether it would be visible or not
+            title: 'Delete',
+            icon: 'fa fa-trash', // `fa fa-trash` will change like <i class="fa fa-trash"></i>
+            handler: (row: any) => {
+              this.deleteVehicle(row._id);
+            },
+          },
+        ],
+      },
+    ];
   }
 
   selectTab(event: any) {}
@@ -36,4 +64,6 @@ export class VehiclesComponent {
       this.router.navigate(['/category/' + category._id + '/view']);
     }
   }
+
+  deleteVehicle(id: any) {}
 }

@@ -6,7 +6,7 @@ import { VehicleService } from '../../services/vehicle.service';
 @Component({
   selector: 'app-vehicle-form',
   templateUrl: './vehicle-form.component.html',
-  styleUrl: './vehicle-form.component.scss'
+  styleUrl: './vehicle-form.component.scss',
 })
 export class VehicleFormComponent {
   vehicleTypes: any = ['100', '200', '400', '600'];
@@ -19,8 +19,7 @@ export class VehicleFormComponent {
   }
 
   submit(form: any) {
-    console.log('yes');
-    console.log(this.model);
     this.vehicleService.createVehicle(this.model).subscribe((data: any) => {});
+    this.router.navigate(['/vehicles']);
   }
 }

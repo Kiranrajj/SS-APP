@@ -20,11 +20,10 @@ exports.getAllVehicles = async (req, res) => {
   let query = {
     s: input.isDeleted && input.isDeleted.toString() == "true" ? "D" : "A",
   };
-
-  Vehicle.paginate(query, {
-    page: input.page,
-    limit: parseInt(input.per_page || 10),
-  }).then((result) => {
-    res.send(200, result);
-  });
+  try {
+    const vehicles = await Vehicle.find(query);
+    res.status(200).json(vehicles);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 };
