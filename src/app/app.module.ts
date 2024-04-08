@@ -27,6 +27,8 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { MatTableModule } from '@angular/material/table';
 import { MatGridComponent } from './Components/mat-grid/mat-grid.component';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
+import { AlertComponent } from './Components/alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     VehicleFormComponent,
     CustomerFormComponent,
     MatGridComponent,
+    AlertComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,6 +58,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     TabsModule.forRoot(),
     MatTableModule,
     MatTabsModule,
+    MdbModalModule,
   ],
   providers: [provideAnimationsAsync(), provideNativeDateAdapter()],
   bootstrap: [AppComponent],

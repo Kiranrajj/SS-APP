@@ -29,37 +29,55 @@ exports.getAllVehicles = async (req, res) => {
 };
 
 exports.getVehicleById = async (req, res) => {
-  let query = { s: 'A' };
+  let query = { s: "A" };
   query._id = req.params.id;
 
   try {
     // Find one document that matches the specified query
     const result = await Vehicle.findOne(query);
     res.status(200).json(result);
-} catch (error) {
-    console.error('Error occurred while executing findOne:', error);
+  } catch (error) {
+    console.error("Error occurred while executing findOne:", error);
     res.status(500).json({ message: err.message });
-}
-}
+  }
+};
 
 exports.updateVehicle = async (req, res) => {
   let body = req.body;
-  let newData = {}
+  let newData = {};
 
-  if(body.vehicleName){
+  if (body.vehicleName) {
     newData.vehicleName = body.vehicleName;
   }
-  if(body.vehicleNumber){
+  if (body.vehicleNumber) {
     newData.vehicleNumber = body.vehicleNumber;
   }
-  if(body.amount){
+  if (body.amount) {
     newData.amount = body.amount;
   }
 
-  try{
-    const result = await Vehicle.findOneAndUpdate({ _id: req.params.id }, { $set: newData }, { new: true });
+  try {
+    const result = await Vehicle.findOneAndUpdate(
+      { _id: req.params.id },
+      { $set: newData },
+      { new: true }
+    );
   } catch (error) {
-    console.error('Error updating vehicle:', error);
+    console.error("Error updating vehicle:", error);
   }
+};
 
-}
+exports.deleteVehicle = async (req, res) => {
+  let query = {};
+  query._id = req.params.id;
+
+  try {
+    const result = await Vehicle.findOneAndUpdate(
+      query,
+      { s: "D" },
+      { new: true }
+    );
+  } catch (error) {
+    console.error("Error deleting vehicle:", error);
+  }
+};

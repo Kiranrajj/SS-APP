@@ -11,12 +11,15 @@ router.get("/", (req, res) => {
 });
 
 router.get("/:id", (req, res) => {
-  VehicleCtrl.getVehicleById(req,res);
+  VehicleCtrl.getVehicleById(req, res);
 });
 
 router.put("/:id", (req, res) => {
   VehicleCtrl.updateVehicle(req, res);
 });
 
+router.delete("/:id", (req, res) => {
+  VehicleCtrl.deleteVehicle(req, res);
+});
 
 module.exports = router;

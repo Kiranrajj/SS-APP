@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 import { VehicleService } from '../services/vehicle.service';
+import { MdbModalService } from 'mdb-angular-ui-kit/modal';
+import { AlertComponent } from '../Components/alert/alert.component';
 
 @Component({
   selector: 'app-vehicles',
@@ -20,7 +22,11 @@ export class VehiclesComponent {
     page: 1,
   };
 
-  constructor(private router: Router, private vehicleService: VehicleService) {}
+  constructor(
+    private router: Router,
+    private vehicleService: VehicleService,
+    private model: MdbModalService
+  ) {}
 
   ngOnInit(): void {
     this.vehicleService.getAllVehicles(this.filter).subscribe((data) => {
@@ -54,15 +60,14 @@ export class VehiclesComponent {
           ],
         },
       ];
-  });
+    });
   }
 
-  async loadVehicles(){
+  async loadVehicles() {
     this.vehicleService.getAllVehicles(this.filter).subscribe((data) => {
-    this.vehicles.docs = data;
-    console.log(this.vehicles);
-  });
-
+      this.vehicles.docs = data;
+      console.log(this.vehicles);
+    });
   }
 
   selectTab(event: any) {}
@@ -75,6 +80,23 @@ export class VehiclesComponent {
   }
 
   deleteVehicle(id: any) {
-    console.log('delte')
+    this.model.open(AlertComponent, {
+      data: {
+        title: 'Delete Vehicle',
+        message: 'Are you sure you want to delete this vehicle?',
+        actions: [
+          { title: 'No', class: 'btn btn-secondary' },
+          {
+            title: 'Yes',
+            class: 'btn btn-primary',
+            handler: () => {
+              this.vehicleService.deleteVehicle(id).subscribe((value: any) => {
+                this.ngOnInit();
+              });
+            },
+          },
+        ],
+      },
+    });
   }
 }

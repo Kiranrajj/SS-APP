@@ -27,21 +27,34 @@ export class VehicleService {
   }
 
   getVehicleById(id: any): Observable<any> {
-    let url = `http://localhost:8080/vehicle/${id}`
+    let url = `http://localhost:8080/vehicle/${id}`;
     return this.http.get<any>(url).pipe(
-      map(data => {
-        return data
+      map((data) => {
+        return data;
       }),
       catchError(() => throwError('Unable to Authorized'))
     );
   }
 
-  updateVehicle(input: any, conversion: any = (input: any) => input): Observable<any> {
-    let url = `http://localhost:8080/vehicle/${input._id}`
-    let payload = conversion(input)
+  updateVehicle(
+    input: any,
+    conversion: any = (input: any) => input
+  ): Observable<any> {
+    let url = `http://localhost:8080/vehicle/${input._id}`;
+    let payload = conversion(input);
     return this.http.put<any>(url, payload).pipe(
-      map(data => {
-        return data.data
+      map((data) => {
+        return data.data;
+      }),
+      catchError(() => throwError('Unable to Authorized'))
+    );
+  }
+
+  deleteVehicle(id: any): Observable<any> {
+    let url = `http://localhost:8080/vehicle/${id}`;
+    return this.http.delete<any>(url).pipe(
+      map((data) => {
+        return data.data;
       }),
       catchError(() => throwError('Unable to Authorized'))
     );

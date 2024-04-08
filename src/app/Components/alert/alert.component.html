@@ -1,0 +1,19 @@
+<div class="modal-header">
+  <h3 class="modal-title" id="exampleModalLabel">{{ title }}</h3>
+  <span (click)="dismiss()">
+    <i class="fa fa-times" aria-hidden="true"></i>
+  </span>
+</div>
+<div class="modal-body">
+  {{ message }}
+</div>
+<div class="modal-footer">
+  <button
+    type="button"
+    *ngFor="let action of actions"
+    [class]="action.class"
+    (click)="click(action)"
+  >
+    {{ action.title }}
+  </button>
+</div>
