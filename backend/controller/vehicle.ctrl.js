@@ -27,3 +27,39 @@ exports.getAllVehicles = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
+
+exports.getVehicleById = async (req, res) => {
+  let query = { s: 'A' };
+  query._id = req.params.id;
+
+  try {
+    // Find one document that matches the specified query
+    const result = await Vehicle.findOne(query);
+    res.status(200).json(result);
+} catch (error) {
+    console.error('Error occurred while executing findOne:', error);
+    res.status(500).json({ message: err.message });
+}
+}
+
+exports.updateVehicle = async (req, res) => {
+  let body = req.body;
+  let newData = {}
+
+  if(body.vehicleName){
+    newData.vehicleName = body.vehicleName;
+  }
+  if(body.vehicleNumber){
+    newData.vehicleNumber = body.vehicleNumber;
+  }
+  if(body.amount){
+    newData.amount = body.amount;
+  }
+
+  try{
+    const result = await Vehicle.findOneAndUpdate({ _id: req.params.id }, { $set: newData }, { new: true });
+  } catch (error) {
+    console.error('Error updating vehicle:', error);
+  }
+
+}

@@ -26,34 +26,43 @@ export class VehiclesComponent {
     this.vehicleService.getAllVehicles(this.filter).subscribe((data) => {
       this.vehicles.docs = data;
       console.log(this.vehicles);
-    });
-    this.tableConfig = [
-      { column: 'Vehicle Name', columnVal: 'vehicleName' },
-      { column: 'Vehicle Number', columnVal: 'vehicleNumber' },
-      { column: 'Type', columnVal: 'type' },
-      { column: 'Amount', columnVal: 'amount' },
-      {
-        column: 'Action',
-        actions: [
-          {
-            if: true, // condition wether it would be visible or not
-            title: 'Edit',
-            icon: 'fa fa-edit text-success', // `fa fa-trash` will change like <i class="fa fa-trash"></i>
-            handler: (row: any) => {
-              this.router.navigate([`/vehicles/${row._id}`]);
+
+      // Initialize table configuration after data is fetched
+      this.tableConfig = [
+        { column: 'Vehicle Name', columnVal: 'vehicleName' },
+        { column: 'Vehicle Number', columnVal: 'vehicleNumber' },
+        { column: 'Amount', columnVal: 'amount' },
+        {
+          column: 'Action',
+          actions: [
+            {
+              if: true, // condition wether it would be visible or not
+              title: 'Edit',
+              icon: 'fa-solid fa-pencil', // `fa fa-trash` will change like <i class="fa fa-trash"></i>
+              handler: (row: any) => {
+                this.router.navigate([`/vehicles/${row._id}`]);
+              },
             },
-          },
-          {
-            if: true, // condition wether it would be visible or not
-            title: 'Delete',
-            icon: 'fa fa-trash', // `fa fa-trash` will change like <i class="fa fa-trash"></i>
-            handler: (row: any) => {
-              this.deleteVehicle(row._id);
+            {
+              if: true, // condition wether it would be visible or not
+              title: 'Delete',
+              icon: 'fa fa-trash', // `fa fa-trash` will change like <i class="fa fa-trash"></i>
+              handler: (row: any) => {
+                this.deleteVehicle(row._id);
+              },
             },
-          },
-        ],
-      },
-    ];
+          ],
+        },
+      ];
+  });
+  }
+
+  async loadVehicles(){
+    this.vehicleService.getAllVehicles(this.filter).subscribe((data) => {
+    this.vehicles.docs = data;
+    console.log(this.vehicles);
+  });
+
   }
 
   selectTab(event: any) {}
@@ -65,5 +74,7 @@ export class VehiclesComponent {
     }
   }
 
-  deleteVehicle(id: any) {}
+  deleteVehicle(id: any) {
+    console.log('delte')
+  }
 }

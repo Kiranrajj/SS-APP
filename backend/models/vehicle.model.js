@@ -14,8 +14,7 @@ const vehicle = new mongoose.Schema(
     },
     type: {
       type: String,
-      enum: ["200", "100", "400", "600"],
-      default: "200",
+      enum: ["200", "100", "400", "600"]
     },
     amount: {
       type: Number,
