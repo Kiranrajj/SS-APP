@@ -1,4 +1,4 @@
-import { Component , OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VehicleService } from '../../services/vehicle.service';
@@ -11,27 +11,27 @@ import { VehicleService } from '../../services/vehicle.service';
 export class VehicleFormComponent implements OnInit {
   vehicleTypes: any = ['100', '200', '400', '600'];
   model: any = {};
-  action: any = "create";
+  action: any = 'create';
 
-  constructor(private router: Router,
-     private vehicleService: VehicleService,
-     private route: ActivatedRoute
-     ) {}
-
+  constructor(
+    private router: Router,
+    private vehicleService: VehicleService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((data: any) =>{
-      if (data.params.id != "new"){
-        this.get_vehicle(data.params.id)
-        this.action = 'update'
+    this.route.paramMap.subscribe((data: any) => {
+      if (data.params.id != 'new') {
+        this.get_vehicle(data.params.id);
+        this.action = 'update';
       }
-    })
+    });
   }
 
-  get_vehicle(id : any){
-    this.vehicleService.getVehicleById(id).subscribe((value: any)=>{
-      this.model = value
-    })
+  async get_vehicle(id: any) {
+    await this.vehicleService.getVehicleById(id).subscribe((value: any) => {
+      this.model = value;
+    });
   }
 
   change() {
@@ -39,11 +39,15 @@ export class VehicleFormComponent implements OnInit {
   }
 
   submit(form: any) {
-    if(this.action == "create"){
-      this.vehicleService.createVehicle(this.model).subscribe((data: any) => {});
+    if (this.action == 'create') {
+      this.vehicleService
+        .createVehicle(this.model)
+        .subscribe((data: any) => {});
       this.router.navigate(['/vehicles']);
-    }else{
-      this.vehicleService.updateVehicle(this.model).subscribe((data: any) => {});
+    } else {
+      this.vehicleService
+        .updateVehicle(this.model)
+        .subscribe((data: any) => {});
       this.router.navigate(['/vehicles']);
     }
   }

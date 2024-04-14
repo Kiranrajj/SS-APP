@@ -30,7 +30,9 @@ exports.getAllVehicles = async (req, res) => {
 
 exports.getVehicleById = async (req, res) => {
   let query = { s: "A" };
-  query._id = req.params.id;
+  if (req.params.id) {
+    query._id = req.params.id;
+  }
 
   try {
     // Find one document that matches the specified query
@@ -38,7 +40,7 @@ exports.getVehicleById = async (req, res) => {
     res.status(200).json(result);
   } catch (error) {
     console.error("Error occurred while executing findOne:", error);
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ message: error.message });
   }
 };
 

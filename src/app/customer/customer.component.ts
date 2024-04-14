@@ -7,17 +7,25 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './customer.component.scss',
 })
 export class CustomerComponent {
-  vehicles: any = [];
+  customers: any = {
+    docs: [],
+  };
+  tableConfig: any = [];
+  tabs: any = ['Active', 'Deleted'];
+  isDeleted: any = false;
+  filter: any = {
+    isDeleted: false,
+    page: 1,
+  };
   userTypes: any = ['user', 'admin'];
   model: any = {};
-  countries = [
-    { code: 'US', name: 'United States' },
-    { code: 'CA', name: 'Canada' },
-    { code: 'GB', name: 'United Kingdom' },
-    // Other countries...
-  ];
 
   change() {
     console.log(this.model);
   }
+
+  selectTab(event: any) {}
+
+  navigateToPage(page: any) {}
+  view(category: any) {}
 }

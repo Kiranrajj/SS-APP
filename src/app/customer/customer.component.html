@@ -1,57 +1,35 @@
-<div class="main">
-  <div class="container">
-    <div>
-      <div class="row">
-        <div class="col-4">
-          <label for="name">Customer Name</label>
-          <input
-            [(ngModel)]="model.name"
-            (ngModelChange)="change()"
-            class="form-control"
-            type="text"
-            id="name"
-          />
+<div class="header bg-gradient-primary pb-8 pt-5 pt-md-8"></div>
+<div class="container-fluid mt--7">
+  <!-- Table -->
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header border-0">
+          <h3 class="mb-0">Customer List </h3>
         </div>
-        <div class="col-4">
-          <label for="mobile">Customer Mobile Number</label>
-          <input
-            [(ngModel)]="model.mobile"
-            (ngModelChange)="change()"
-            class="form-control"
-            type="number"
-            id="mobile"
-          />
-        </div>
-        <div class="col-4">
-          <label for="vehicles">Vehicles</label>
-          <ng-select
-            name="vehicles"
-            class="form-control"
-            [items]="vehicles"
-            bindLabel="name"
-            [(ngModel)]="model.Vehicles"
-            (ngModelChange)="change()"
-            required
+        <div>
+          <mat-tab-group
+            mat-align-tabs="center"
+            [selectedIndex]="isDeleted ? 1 : 0"
+            (selectedIndexChange)="selectTab($event)"
           >
-          </ng-select>
+            <mat-tab *ngFor="let tab of tabs" [label]="tab">
+              <div class="table-responsive">
+                <app-mat-grid
+                  [tableConfig]="tableConfig"
+                  [data]="customers"
+                  (rowDoubleClicked)="view($event)"
+                ></app-mat-grid>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
         </div>
-        <div class="col-4">
-          <label for="userType">Type</label>
-          <ng-select
-            name="userType"
-            class="form-control"
-            [items]="userTypes"
-            [(ngModel)]="model.userType"
-            (ngModelChange)="change()"
-            required
-          >
-          </ng-select>
-        </div>
-        <!-- <div class="col-4">
-          <label for="vehicleNumber">Vehicle Number</label>
-          <input type="text" id="vehicleNumber">
-        </div> -->
       </div>
     </div>
   </div>
+</div>
+<div class="fab fab-bottom fab-right">
+  <a class="btn btn-primary" [routerLink]="['/customer', 'new']">
+    <i class="fa fa-plus" aria-hidden="true"></i>
+  </a>
 </div>

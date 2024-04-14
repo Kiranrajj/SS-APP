@@ -64,20 +64,15 @@ export class VehiclesComponent {
   }
 
   async loadVehicles() {
-    this.vehicleService.getAllVehicles(this.filter).subscribe((data) => {
+    await this.vehicleService.getAllVehicles(this.filter).subscribe((data) => {
       this.vehicles.docs = data;
-      console.log(this.vehicles);
     });
   }
 
   selectTab(event: any) {}
 
   navigateToPage(page: any) {}
-  view(category: any) {
-    if (category.s == 'A') {
-      this.router.navigate(['/category/' + category._id + '/view']);
-    }
-  }
+  view(vehicle: any) {}
 
   deleteVehicle(id: any) {
     this.model.open(AlertComponent, {

@@ -1,1 +1,74 @@
-<p>customer-form works!</p>
+<div class="main">
+  <div class="container">
+    <div>
+      <div class="row">
+        <div class="col-4">
+          <label for="name">Customer Name</label>
+          <input
+            [(ngModel)]="model.name"
+            (ngModelChange)="change()"
+            class="form-control"
+            type="text"
+            id="name"
+          />
+        </div>
+        <div class="col-4">
+          <label for="mobile">Customer Mobile Number</label>
+          <input
+            [(ngModel)]="model.mobile"
+            (ngModelChange)="change()"
+            class="form-control"
+            type="number"
+            id="mobile"
+          />
+        </div>
+        <div class="col-4">
+          <label for="vehicles">Vehicles</label>
+          <ng-select
+            name="vehicles"
+            class="form-control"
+            [items]="vehicles"
+            bindLabel="name"
+            [(ngModel)]="model.Vehicles"
+            (ngModelChange)="change()"
+            required
+          >
+          </ng-select>
+        </div>
+        <div class="col-4">
+          <label for="userType">Type</label>
+          <ng-select
+            name="userType"
+            class="form-control"
+            [items]="userTypes"
+            [(ngModel)]="model.userType"
+            (ngModelChange)="change()"
+            required
+          >
+          </ng-select>
+        </div>
+        <!-- <div class="col-4">
+          <label for="vehicleNumber">Vehicle Number</label>
+          <input type="text" id="vehicleNumber">
+        </div> -->
+      </div>
+      <div class="col-md-4 text-md-right">
+        <button
+          [routerLink]="['/customer']"
+          class="btn btn-light btn-labeled"
+        >
+          <span class="btn-label">
+            <i class="fa fa-ban"></i>
+          </span>
+          <span> Cancel </span>
+        </button>
+        <button type="submit" class="btn btn-success btn-labeled">
+          <span class="btn-label">
+            <i class="fa fa-save"></i>
+          </span>
+          <span> {{action}} </span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -6,5 +6,12 @@ import { Component } from '@angular/core';
   styleUrl: './customer-form.component.scss'
 })
 export class CustomerFormComponent {
+  vehicles: any = [];
+  userTypes: any = ['user', 'admin'];
+  model: any = {};
+  action: any = 'create';
 
+  change() {
+    console.log(this.model);
+  }
 }
