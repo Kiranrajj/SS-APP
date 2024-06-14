@@ -1,17 +1,18 @@
 <div class="main">
   <div class="container">
     <div>
+      <h1>Add Vehicle</h1>
       <form #form="ngForm" (ngSubmit)="submit(form)">
         <div class="row">
           <div class="col-4">
             <label for="vehicleName">Vehicle Name</label>
             <input
               name="vehicleName"
+              id="vehicleName"
               class="form-control"
               [(ngModel)]="model.vehicleName"
               (ngModelChange)="change()"
               type="text"
-              id="vehicleName"
             />
           </div>
           <div class="col-4">

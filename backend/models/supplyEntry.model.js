@@ -2,14 +2,14 @@ const mongoose = require("mongoose");
 // const paginate = require('will-paginate');
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
-const supply = new mongoose.Schema(
+const supplyEntry = new mongoose.Schema(
   {
-    vehicle: {
+    vehicleId: {
       type: ObjectId,
       required: true,
       ref: "vehicle",
     },
-    customer: {
+    customerId: {
       type: ObjectId,
       required: true,
       ref: "user",
@@ -18,15 +18,11 @@ const supply = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    supply_id: {
-      type: String,
-      required: false,
-    },
-    pickupdate: {
+    dateOfSupply: {
       type: Date,
       required: false,
     },
-    timeslot: {
+    supplyEntry_id: {
       type: String,
       required: false,
     },
@@ -37,6 +33,6 @@ const supply = new mongoose.Schema(
   }
 );
 
-// supply.plugin(paginate);
+// supplyEntry.plugin(paginate);
 
-module.exports = mongoose.model("supply", supply);
+module.exports = mongoose.model("supplyEntry", supplyEntry);

@@ -1,6 +1,7 @@
 <div class="main">
   <div class="container">
     <div>
+      <form #form="ngForm" (ngSubmit)="submit(form)">
       <div class="row">
         <div class="col-4">
           <label for="name">Customer Name</label>
@@ -10,6 +11,7 @@
             class="form-control"
             type="text"
             id="name"
+            name="name"
           />
         </div>
         <div class="col-4">
@@ -20,6 +22,7 @@
             class="form-control"
             type="number"
             id="mobile"
+            name="mobile"
           />
         </div>
         <div class="col-4">
@@ -28,8 +31,9 @@
             name="vehicles"
             class="form-control"
             [items]="vehicles"
-            bindLabel="name"
-            [(ngModel)]="model.Vehicles"
+            bindLabel="vehicleName"
+            bindValue="_id"
+            [(ngModel)]="model.vehicleId"
             (ngModelChange)="change()"
             required
           >
@@ -69,6 +73,7 @@
           <span> {{action}} </span>
         </button>
       </div>
+      </form>
     </div>
   </div>
 </div>

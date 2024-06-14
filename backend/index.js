@@ -3,6 +3,7 @@ var bodyParser = require("body-parser");
 var path = require("path");
 let User = require("./routes/user");
 let Vehicle = require("./routes/vehicle");
+let SupplyEntry = require("./routes/supplyEntry");
 const mongoose = require("mongoose");
 
 mongoose.connect("mongodb://127.0.0.1:27017/SS-APP");
@@ -33,6 +34,8 @@ app.use((req, res, next) => {
 });
 
 app.use("/vehicle", Vehicle);
+app.use("/user", User);
+app.use("/supplyEntry", SupplyEntry);
 
 app.listen(8080, () => {
   console.log("Server is running on port 8080");

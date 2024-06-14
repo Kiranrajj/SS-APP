@@ -26,7 +26,15 @@ const routes: Routes = [
   },
   {
     path: '',
-    component: VehicleFormComponent,
+    component: VehiclesComponent,
+  },
+  {
+    path: 'supplyentry',
+    component: SupplyEntryComponent,
+  },
+  {
+    path: '',
+    component: VehiclesComponent,
   },
 ];
 

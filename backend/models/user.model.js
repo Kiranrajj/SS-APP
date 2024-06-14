@@ -25,7 +25,7 @@ const user = new mongoose.Schema(
       type: String,
       required: false,
     },
-    vehicle: {
+    vehicleId: {
       type: ObjectId,
       required: false,
       ref: "vehicle",
@@ -34,6 +34,10 @@ const user = new mongoose.Schema(
       type: String,
       enum: ["customer", "admin", "none"],
       default: "customer",
+    },
+    s: {
+      type: String,
+      default: "A",
     },
   },
   {
