@@ -50,6 +50,21 @@ exports.deleteUser = async (req, res) => {
   }
 };
 
+exports.restoreUser = async (req, res) => {
+  let query = {};
+  query._id = req.params.id;
+
+  try {
+    const result = await User.findOneAndUpdate(
+      query,
+      { s: "A" },
+      { new: true }
+    );
+  } catch (error) {
+    console.error("Error restoring user:", error);
+  }
+};
+
 exports.updateUser = async (req, res) => {
   let body = req.body;
   let newData = {};

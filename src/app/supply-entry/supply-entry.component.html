@@ -1,144 +1,39 @@
-<!-- <div class="main">
-  <div class="container">
-    <div>
-      <div class="row">
-        <div class="col-4">
-          <label for="customer">Customer</label>
-          <ng-select
-            name="customer"
-            class="form-control"
-            [items]="customers"
-            [(ngModel)]="model.customer"
-            (ngModelChange)="change()"
-            required
+<div class="header bg-gradient-primary pb-8 pt-5 pt-md-8"></div>
+<div class="container-fluid mt--7">
+  <!-- Table -->
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header border-0">
+          <h3 class="mb-0">Water Supply Entry List </h3>
+        </div>
+        <div>
+          <mat-tab-group
+            mat-align-tabs="center"
+            [selectedIndex]="filter.isDeleted ? 1 : 0"
+            (selectedIndexChange)="selectTab($event)"
           >
-          </ng-select>
-        </div>
-        <div class="col-4">
-          <label for="vehicleNumber">Vehicle Number</label>
-          <ng-select
-            name="vehicleNumber"
-            class="form-control"
-            [items]="customers"
-            [(ngModel)]="model.vehicleNumber"
-            (ngModelChange)="change()"
-            required
-          >
-          </ng-select>
-        </div>
-        <div class="col-4">
-          <label for="amount">Amount</label>
-          <input
-            class="form-control"
-            [(ngModel)]="model.amount"
-            (ngModelChange)="change()"
-            type="number"
-            id="amount"
-          />
-        </div>
-        <div class="col-4">
-          <label for="supplyDate">Water Supply Date</label>
-          <mat-card class="demo-inline-calendar-card">
-            <mat-calendar [(selected)]="selected" [(ngModel)]="model.dateOfSupply" (ngModelChange)="change()"></mat-calendar>
-          </mat-card>
-          <p>Selected date: {{selected}}</p>
-        </div>
-        <div class="col-md-4 text-md-right">
-          <button
-            [routerLink]="['/']"
-            class="btn btn-light btn-labeled"
-          >
-            <span class="btn-label">
-              <i class="fa fa-ban"></i>
-            </span>
-            <span> Cancel </span>
-          </button>
-          <button type="submit" class="btn btn-success btn-labeled">
-            <span class="btn-label">
-              <i class="fa fa-save"></i>
-            </span>
-            <span> {{action}} </span>
-          </button>
+            <mat-tab *ngFor="let tab of tabs" [label]="tab">
+              <div class="table-responsive">
+                <app-mat-grid
+                  [tableConfig]="tableConfig"
+                  [data]="entries"
+                  (rowDoubleClicked)="view($event)"
+                ></app-mat-grid>
+                <!-- <app-pagination
+                  [data]="entries"
+                  (getPage)="navigateToPage($event)"
+                ></app-pagination> -->
+              </div>
+            </mat-tab>
+          </mat-tab-group>
         </div>
       </div>
     </div>
   </div>
-</div> -->
-
-<div class="main">
-  <div class="container">
-    <div>
-      <h1>Add Water Supply Entry</h1>
-      <form #form="ngForm" (ngSubmit)="submit(form)">
-        <div class="row">
-          <div class="col-4">
-            <label for="customer">Customer</label>
-            <ng-select
-              name="customer"
-              id="customer"
-              class="form-control"
-              [items]="customers"
-              bindLabel="name"
-              bindValue="_id"
-              [(ngModel)]="model.customerId"
-              (ngModelChange)="change()"
-              required
-            >
-            </ng-select>
-          </div>
-          <div class="col-4">
-            <label for="vehicleNumber">Vehicle Number</label>
-            <ng-select
-              name="vehicleNumber"
-              id="vehicleNumber"
-              class="form-control"
-              [items]="vehicles"
-              bindLabel="vehicleName"
-              bindValue="_id"
-              [(ngModel)]="model.vehicleId"
-              (ngModelChange)="change()"
-              required
-            >
-            </ng-select>
-          </div>
-          <div class="col-4">
-            <label for="amount">Amount</label>
-            <input
-              name="amount"
-              class="form-control"
-              [(ngModel)]="model.amount"
-              (ngModelChange)="change()"
-              type="number"
-              id="amount"
-            />
-          </div>
-          <div class="col-4">
-            <label for="supplyDate">Water Supply Date</label>
-            <mat-card class="demo-inline-calendar-card">
-              <mat-calendar [(selected)]="selected" (click)="setDate()"></mat-calendar>
-            </mat-card>
-            <p>Selected date: {{selected}}</p>
-          </div>
-          <div class="col-md-4 text-md-right">
-            <button
-              [routerLink]="['/']"
-              class="btn btn-light btn-labeled"
-            >
-              <span class="btn-label">
-                <i class="fa fa-ban"></i>
-              </span>
-              <span> Cancel </span>
-            </button>
-            <button type="submit" class="btn btn-success btn-labeled">
-              <span class="btn-label">
-                <i class="fa fa-save"></i>
-              </span>
-              <span> {{action}} </span>
-            </button>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
 </div>
-
+<div class="fab fab-bottom fab-right">
+  <a class="btn btn-primary" [routerLink]="['/supplyentry', 'new']">
+    <i class="fa fa-plus" aria-hidden="true"></i>
+  </a>
+</div>

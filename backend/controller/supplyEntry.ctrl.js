@@ -11,16 +11,17 @@ exports.createSupplyEntry = (req, res) => {
   });
 
   supplyEntry.save();
-  res.send(200);
+  res.sendStatus(200);
 };
 
 exports.getAllSupplyEntrys = async (req, res) => {
   let input = req.query;
+  console.log(input)
   let query = {
     s: input.isDeleted && input.isDeleted.toString() == "true" ? "D" : "A",
   };
   try {
-    const supplyEntrys = await supplyEntry.find(query);
+    const supplyEntrys = await SupplyEntry.find(query).populate(['customerId', 'vehicleId']);
     res.status(200).json(supplyEntrys);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -35,7 +36,7 @@ exports.getSupplyEntryById = async (req, res) => {
 
   try {
     // Find one document that matches the specified query
-    const result = await supplyEntry.findOne(query);
+    const result = await SupplyEntry.findOne(query);
     res.status(200).json(result);
   } catch (error) {
     console.error("Error occurred while executing findOne:", error);
@@ -61,7 +62,7 @@ exports.updateSupplyEntry = async (req, res) => {
   }
 
   try {
-    const result = await supplyEntry.findOneAndUpdate(
+    const result = await SupplyEntry.findOneAndUpdate(
       { _id: req.params.id },
       { $set: newData },
       { new: true }
@@ -76,12 +77,27 @@ exports.deleteSupplyEntry = async (req, res) => {
   query._id = req.params.id;
 
   try {
-    const result = await supplyEntry.findOneAndUpdate(
+    const result = await SupplyEntry.findOneAndUpdate(
       query,
       { s: "D" },
       { new: true }
     );
   } catch (error) {
     console.error("Error deleting supplyEntry:", error);
+  }
+};
+
+exports.restoreSupplyEntry = async (req, res) => {
+  let query = {};
+  query._id = req.params.id;
+
+  try {
+    const result = await SupplyEntry.findOneAndUpdate(
+      query,
+      { s: "A" },
+      { new: true }
+    );
+  } catch (error) {
+    console.error("Error restoring supplyEntry:", error);
   }
 };

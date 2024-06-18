@@ -22,4 +22,8 @@ router.delete("/:id", (req, res) => {
   supplyEntryCtrl.deleteSupplyEntry(req, res);
 });
 
+router.put("/restore/:id", (req, res) => {
+  supplyEntryCtrl.restoreSupplyEntry(req, res);
+});
+
 module.exports = router;

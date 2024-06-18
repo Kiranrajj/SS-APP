@@ -1,0 +1,144 @@
+<!-- <div class="main">
+  <div class="container">
+    <div>
+      <div class="row">
+        <div class="col-4">
+          <label for="customer">Customer</label>
+          <ng-select
+            name="customer"
+            class="form-control"
+            [items]="customers"
+            [(ngModel)]="model.customer"
+            (ngModelChange)="change()"
+            required
+          >
+          </ng-select>
+        </div>
+        <div class="col-4">
+          <label for="vehicleNumber">Vehicle Number</label>
+          <ng-select
+            name="vehicleNumber"
+            class="form-control"
+            [items]="customers"
+            [(ngModel)]="model.vehicleNumber"
+            (ngModelChange)="change()"
+            required
+          >
+          </ng-select>
+        </div>
+        <div class="col-4">
+          <label for="amount">Amount</label>
+          <input
+            class="form-control"
+            [(ngModel)]="model.amount"
+            (ngModelChange)="change()"
+            type="number"
+            id="amount"
+          />
+        </div>
+        <div class="col-4">
+          <label for="supplyDate">Water Supply Date</label>
+          <mat-card class="demo-inline-calendar-card">
+            <mat-calendar [(selected)]="selected" [(ngModel)]="model.dateOfSupply" (ngModelChange)="change()"></mat-calendar>
+          </mat-card>
+          <p>Selected date: {{selected}}</p>
+        </div>
+        <div class="col-md-4 text-md-right">
+          <button
+            [routerLink]="['/']"
+            class="btn btn-light btn-labeled"
+          >
+            <span class="btn-label">
+              <i class="fa fa-ban"></i>
+            </span>
+            <span> Cancel </span>
+          </button>
+          <button type="submit" class="btn btn-success btn-labeled">
+            <span class="btn-label">
+              <i class="fa fa-save"></i>
+            </span>
+            <span> {{action}} </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div class="main">
+  <div class="container">
+    <div>
+      <h1>Add Water Supply Entry</h1>
+      <form #form="ngForm" (ngSubmit)="submit(form)">
+        <div class="row">
+          <div class="col-4">
+            <label for="customer">Customer</label>
+            <ng-select
+              name="customer"
+              id="customer"
+              class="form-control"
+              [items]="customers"
+              bindLabel="name"
+              bindValue="_id"
+              [(ngModel)]="model.customerId"
+              (ngModelChange)="change()"
+              required
+            >
+            </ng-select>
+          </div>
+          <div class="col-4">
+            <label for="vehicleNumber">Vehicle Number</label>
+            <ng-select
+              name="vehicleNumber"
+              id="vehicleNumber"
+              class="form-control"
+              [items]="vehicles"
+              bindLabel="vehicleName"
+              bindValue="_id"
+              [(ngModel)]="model.vehicleId"
+              (ngModelChange)="change()"
+              required
+            >
+            </ng-select>
+          </div>
+          <div class="col-4">
+            <label for="amount">Amount</label>
+            <input
+              name="amount"
+              class="form-control"
+              [(ngModel)]="model.amount"
+              (ngModelChange)="change()"
+              type="number"
+              id="amount"
+            />
+          </div>
+          <div class="col-4">
+            <label for="supplyDate">Water Supply Date</label>
+            <mat-card class="demo-inline-calendar-card">
+              <mat-calendar [(selected)]="selected" (click)="setDate()"></mat-calendar>
+            </mat-card>
+            <p>Selected date: {{selected}}</p>
+          </div>
+          <div class="col-md-4 text-md-right">
+            <button
+              [routerLink]="['/']"
+              class="btn btn-light btn-labeled"
+            >
+              <span class="btn-label">
+                <i class="fa fa-ban"></i>
+              </span>
+              <span> Cancel </span>
+            </button>
+            <button type="submit" class="btn btn-success btn-labeled">
+              <span class="btn-label">
+                <i class="fa fa-save"></i>
+              </span>
+              <span> {{action}} </span>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+

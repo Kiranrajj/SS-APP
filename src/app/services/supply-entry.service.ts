@@ -12,7 +12,6 @@ export class SupplyEntryService {
   constructor(private http: HttpClient) { }
 
   createSupplyEntry(input: any) {
-    console.log(input, 'input');
     let url = `http://localhost:8080/supplyEntry`;
     return this.http.post(url, input);
   }
@@ -54,6 +53,16 @@ export class SupplyEntryService {
   deleteSupplyEntry(id: any): Observable<any> {
     let url = `http://localhost:8080/supplyEntry/${id}`;
     return this.http.delete<any>(url).pipe(
+      map((data) => {
+        return data.data;
+      }),
+      catchError(() => throwError('Unable to Authorized'))
+    );
+  }
+
+  restoreSupplyEntry(id: any): Observable<any> {
+    let url = `http://localhost:8080/supplyentry/restore/${id}`;
+    return this.http.put<any>(url,null).pipe(
       map((data) => {
         return data.data;
       }),

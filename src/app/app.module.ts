@@ -29,6 +29,7 @@ import { MatGridComponent } from './Components/mat-grid/mat-grid.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
 import { AlertComponent } from './Components/alert/alert.component';
+import { SupplyEntryFormComponent } from './supply-entry/supply-entry-form/supply-entry-form.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { AlertComponent } from './Components/alert/alert.component';
     CustomerFormComponent,
     MatGridComponent,
     AlertComponent,
+    SupplyEntryFormComponent,
   ],
   imports: [
     BrowserModule,

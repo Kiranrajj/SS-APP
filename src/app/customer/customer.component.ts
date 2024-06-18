@@ -17,7 +17,6 @@ export class CustomerComponent {
   };
   tableConfig: any = [];
   tabs: any = ['Active', 'Deleted'];
-  isDeleted: any = false;
   filter: any = {
     isDeleted: false,
     userType: "customer",
@@ -45,7 +44,7 @@ export class CustomerComponent {
           column: 'Action',
           actions: [
             {
-              if: true, // condition wether it would be visible or not
+              if: !this.filter.isDeleted, // condition wether it would be visible or not
               title: 'Edit',
               icon: 'fa-solid fa-pencil', // `fa fa-trash` will change like <i class="fa fa-trash"></i>
               handler: (row: any) => {
@@ -53,11 +52,19 @@ export class CustomerComponent {
               },
             },
             {
-              if: true, // condition wether it would be visible or not
+              if: !this.filter.isDeleted, // condition wether it would be visible or not
               title: 'Delete',
               icon: 'fa fa-trash', // `fa fa-trash` will change like <i class="fa fa-trash"></i>
               handler: (row: any) => {
-                this.deleteCustomer(row?._id);
+                this.popAlert('Delete',row._id);
+              },
+            },
+            {
+              if: this.filter.isDeleted, // condition wether it would be visible or not
+              title: 'Restore',
+              icon: 'fa fa-backward', // `fa fa-trash` will change like <i class="fa fa-trash"></i>
+              handler: (row: any) => {
+                this.popAlert('Restore',row._id);
               },
             },
           ],
@@ -70,25 +77,35 @@ export class CustomerComponent {
     console.log(this.model);
   }
 
-  selectTab(event: any) {}
+  async selectTab(event: any) {
+    this.filter.isDeleted = event ===1;
+    await this.ngOnInit();
+  }
+
 
   navigateToPage(page: any) {}
   view(category: any) {}
 
-  deleteCustomer(id: any){
+  async popAlert(action:any,id: any) {
     this.model.open(AlertComponent, {
       data: {
-        title: 'Delete Customer',
-        message: 'Are you sure you want to delete this customer?',
+        title: `${action} Customer`,
+        message: `Are you sure you want to ${action.toLowerCase()} this customer?`,
         actions: [
           { title: 'No', class: 'btn btn-secondary' },
           {
             title: 'Yes',
             class: 'btn btn-primary',
             handler: () => {
-              this.userService.deleteUser(id).subscribe((value: any) => {
+              if (action == "Delete") {
+                this.userService.deleteUser(id).subscribe((value: any) => {
+                });
                 this.ngOnInit();
-              });
+              } else {
+                this.userService.restoreUser(id).subscribe((value: any) => {
+                });
+                this.ngOnInit();
+              }
             },
           },
         ],

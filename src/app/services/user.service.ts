@@ -63,4 +63,14 @@ export class UserService {
     );
   }
 
+  restoreUser(id: any): Observable<any> {
+    let url = `http://localhost:8080/user/restore/${id}`;
+    return this.http.put<any>(url,null).pipe(
+      map((data) => {
+        return data.data;
+      }),
+      catchError(() => throwError('Unable to Authorized'))
+    );
+  }
+
 }

@@ -22,4 +22,8 @@ router.delete("/:id", (req, res) => {
   UserCtrl.deleteUser(req, res);
 });
 
+router.put("/restore/:id", (req, res) => {
+  UserCtrl.restoreUser(req, res);
+});
+
 module.exports = router;

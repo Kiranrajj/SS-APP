@@ -11,7 +11,6 @@ export class VehicleService {
   constructor(private http: HttpClient) {}
 
   createVehicle(input: any) {
-    console.log(input, 'input');
     let url = `http://localhost:8080/vehicle`;
     return this.http.post(url, input);
   }
@@ -53,6 +52,15 @@ export class VehicleService {
   deleteVehicle(id: any): Observable<any> {
     let url = `http://localhost:8080/vehicle/${id}`;
     return this.http.delete<any>(url).pipe(
+      map((data) => {
+        return data.data;
+      }),
+      catchError(() => throwError('Unable to Authorized'))
+    );
+  }
+  restoreVehicle(id: any): Observable<any> {
+    let url = `http://localhost:8080/vehicle/restore/${id}`;
+    return this.http.put<any>(url,null).pipe(
       map((data) => {
         return data.data;
       }),

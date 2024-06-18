@@ -16,7 +16,6 @@ export class VehiclesComponent {
   };
   tableConfig: any = [];
   tabs: any = ['Active', 'Deleted'];
-  isDeleted: any = false;
   filter: any = {
     isDeleted: false,
     page: 1,
@@ -25,7 +24,7 @@ export class VehiclesComponent {
   constructor(
     private router: Router,
     private vehicleService: VehicleService,
-    private model: MdbModalService
+    private modal: MdbModalService
   ) {}
 
   ngOnInit(): void {
@@ -42,7 +41,7 @@ export class VehiclesComponent {
           column: 'Action',
           actions: [
             {
-              if: true, // condition wether it would be visible or not
+              if: !this.filter.isDeleted, // condition wether it would be visible or not
               title: 'Edit',
               icon: 'fa-solid fa-pencil', // `fa fa-trash` will change like <i class="fa fa-trash"></i>
               handler: (row: any) => {
@@ -50,11 +49,19 @@ export class VehiclesComponent {
               },
             },
             {
-              if: true, // condition wether it would be visible or not
+              if: !this.filter.isDeleted, // condition wether it would be visible or not
               title: 'Delete',
               icon: 'fa fa-trash', // `fa fa-trash` will change like <i class="fa fa-trash"></i>
               handler: (row: any) => {
-                this.deleteVehicle(row._id);
+                this.popAlert('Delete',row._id);
+              },
+            },
+            {
+              if: this.filter.isDeleted, // condition wether it would be visible or not
+              title: 'Restore',
+              icon: 'fa fa-backward', // `fa fa-trash` will change like <i class="fa fa-trash"></i>
+              handler: (row: any) => {
+                this.popAlert('Restore',row._id);
               },
             },
           ],
@@ -69,25 +76,34 @@ export class VehiclesComponent {
     });
   }
 
-  selectTab(event: any) {}
+  async selectTab(event: any) {
+    this.filter.isDeleted = event ===1;
+    await this.ngOnInit();
+  }
 
   navigateToPage(page: any) {}
   view(vehicle: any) {}
 
-  deleteVehicle(id: any) {
-    this.model.open(AlertComponent, {
+  async popAlert(action:any,id: any) {
+    this.modal.open(AlertComponent, {
       data: {
-        title: 'Delete Vehicle',
-        message: 'Are you sure you want to delete this vehicle?',
+        title: `${action} Vehicle`,
+        message: `Are you sure you want to ${action.toLowerCase()} this vehicle?`,
         actions: [
           { title: 'No', class: 'btn btn-secondary' },
           {
             title: 'Yes',
             class: 'btn btn-primary',
             handler: () => {
-              this.vehicleService.deleteVehicle(id).subscribe((value: any) => {
+              if (action == "Delete") {
+                this.vehicleService.deleteVehicle(id).subscribe((value: any) => {
+                });
                 this.ngOnInit();
-              });
+              } else {
+                this.vehicleService.restoreVehicle(id).subscribe((value: any) => {
+                });
+                this.ngOnInit();
+              }
             },
           },
         ],

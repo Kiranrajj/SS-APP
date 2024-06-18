@@ -21,5 +21,8 @@ router.put("/:id", (req, res) => {
 router.delete("/:id", (req, res) => {
   VehicleCtrl.deleteVehicle(req, res);
 });
+router.put("/restore/:id", (req, res) => {
+  VehicleCtrl.restoreVehicle(req, res);
+});
 
 module.exports = router;

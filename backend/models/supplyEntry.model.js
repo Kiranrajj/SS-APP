@@ -26,6 +26,10 @@ const supplyEntry = new mongoose.Schema(
       type: String,
       required: false,
     },
+    s: {
+      type: String,
+      default: "A",
+    },
   },
   {
     versionKey: false,

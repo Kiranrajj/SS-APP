@@ -82,3 +82,19 @@ exports.deleteVehicle = async (req, res) => {
     console.error("Error deleting vehicle:", error);
   }
 };
+
+exports.restoreVehicle = async (req, res) => {
+  let query = {};
+  query._id = req.params.id;
+
+  try {
+    const result = await Vehicle.findOneAndUpdate(
+      query,
+      { s: "A" },
+      { new: true }
+    );
+  } catch (error) {
+    console.error("Error restoring vehicle:", error);
+  }
+};
+

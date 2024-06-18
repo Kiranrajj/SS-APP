@@ -10,7 +10,7 @@
         <div>
           <mat-tab-group
             mat-align-tabs="center"
-            [selectedIndex]="isDeleted ? 1 : 0"
+            [selectedIndex]="filter.isDeleted ? 1 : 0"
             (selectedIndexChange)="selectTab($event)"
           >
             <mat-tab *ngFor="let tab of tabs" [label]="tab">
